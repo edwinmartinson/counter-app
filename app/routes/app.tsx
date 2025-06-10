@@ -1,6 +1,6 @@
 import Counter from "~/components/Counter";
 import type { Route } from "./+types/app";
-import Settings from "~/components/Settings";
+import Options from "~/components/Options";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -14,7 +14,7 @@ export default function Home() {
     <main className="grid h-full place-content-center">
       <div className="space-y-[100px]">
         <Counter />
-        <Settings />
+        <Options />
       </div>
     </main>
   );

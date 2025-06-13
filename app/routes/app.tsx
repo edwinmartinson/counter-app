@@ -1,6 +1,6 @@
 import type { Route } from "./+types/app";
 
-import AppMachineContext from "~/xstate/AppMachine";
+import AppMachineContext from "~/xstate/appMachine";
 import Steps from "~/components/Steps";
 import Counter from "~/components/Counter";
 import Reset from "~/components/Reset";

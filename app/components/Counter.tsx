@@ -1,43 +1,60 @@
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 
 import BtnCircle from "./BtnCircle";
-import AppMachineContext from "~/xstate/AppMachine";
+import { padWithZeros } from "~/lib/utils";
+import AppMachineContext from "~/xstate/appMachine";
 
 export default function Counter() {
-  const isAppInactive = AppMachineContext.useSelector((state) =>
-    state.matches("appInactive"),
+  const { send } = AppMachineContext.useActorRef();
+
+  const state = AppMachineContext.useSelector(
+    (state) => ({
+      count: state.context.count,
+      maxCount: state.context.max,
+      loadingMutation: state.context.pendingMutation,
+      isAppInactive: state.matches("appInactive"),
+      isAsyncEnabled: state.matches({ appActive: "async" }),
+    }),
+    (a, b) => JSON.stringify(a) === JSON.stringify(b),
   );
-  const isAsyncEnabled = AppMachineContext.useSelector((state) =>
-    state.matches({ appActive: "async" }),
-  );
-  const maxCount = AppMachineContext.useSelector((state) => state.context.max);
+
+  const handle = {
+    increment: () => send({ type: "SET_COUNT", value: "INCREMENT" }),
+    decrement: () => send({ type: "SET_COUNT", value: "DECREMENT" }),
+  };
 
   return (
     <div className="flex flex-col items-center gap-4">
       <div className="flex items-center gap-10">
         <BtnCircle
-          disabled={isAppInactive}
+          disabled={state.isAppInactive}
           large
-          action={() => console.log("Increment count")}
+          action={handle.increment}
+          isLoading={state.loadingMutation === "INC"}
         >
           <PlusIcon className="size-6 stroke-3" />
         </BtnCircle>
 
-        <p className="text-5xl">001</p>
+        <p className="text-5xl">{padWithZeros(state.count, 2)}</p>
 
         <BtnCircle
-          disabled={isAppInactive}
+          disabled={state.isAppInactive}
           large
-          action={() => console.log("Decrement count.")}
+          action={handle.decrement}
+          isLoading={state.loadingMutation === "DEC"}
         >
           <MinusIcon className="size-6 stroke-3" />
         </BtnCircle>
       </div>
 
       <p className="text-content-tertiary text-center">
-        Max step: {maxCount}
+        Max step: {state.maxCount}
         <br />
-        {isAsyncEnabled ? "(async)" : "(sync)"}
+        {state.isAppInactive
+          ? "(disabled)"
+          : state.isAsyncEnabled
+            ? "(async)"
+            : "(sync)"}
       </p>
     </div>
   );

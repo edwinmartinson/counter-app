@@ -10,3 +10,7 @@ export function logError(error: unknown) {
     console.error(`Error deleting task: ${error.message}`);
   } else console.error(error);
 }
+
+export const padWithZeros = (number: number, padNum: number): string => {
+  return String(number).padStart(padNum, "0");
+};

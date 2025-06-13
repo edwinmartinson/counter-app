@@ -1,7 +1,7 @@
 import { Switch } from "@headlessui/react";
 import { PowerIcon } from "@heroicons/react/24/outline";
 
-import AppMachineContext from "~/xstate/AppMachine";
+import AppMachineContext from "~/xstate/appMachine";
 
 export default function BtnPower() {
   const { send } = AppMachineContext.useActorRef();

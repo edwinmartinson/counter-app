@@ -8,10 +8,12 @@
   --color-surface-primary: #0a0a0a;
   --color-surface-secondary: #171717;
   --color-surface-tertiary: #262626;
+  --color-surface-white: #fafafa;
 
   --color-content-primary: #fafafa;
   --color-content-secondary: #a3a3a3;
   --color-content-tertiary: #737373;
+  --color-content-black: #0a0a0a;
 }
 
 @layer base {
@@ -24,12 +26,22 @@
   ::placeholder {
     @apply text-content-tertiary;
   }
+  input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
 }
 
 @layer utilities {
   .scrollbar {
     scrollbar-width: thin;
     scrollbar-color: var(--color-content-primary) var(--color-surface-secondary);
+  }
+
+  .link {
+    @apply hover:text-content-secondary active:text-content-tertiary text-2xl;
   }
 
   .link-line a {

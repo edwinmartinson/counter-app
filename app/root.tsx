@@ -50,6 +50,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "Counter App" },
+    { name: "description", content: "A state machine powered couter" },
+  ];
+}
+
 export default function App() {
   return <Outlet />;
 }

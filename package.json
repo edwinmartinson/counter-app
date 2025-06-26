@@ -1,0 +1,7 @@
+{
+  "name": "counter-app",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}

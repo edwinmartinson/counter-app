@@ -1,7 +1,7 @@
 {
-  "name": "utils",
+  "name": "package-utils",
   "version": "1.0.0",
   "type": "module",
   "main": "./src/main.js",
-  "devDependencies": {}
+  "dependencies": {}
 }

@@ -52,8 +52,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Counter App" },
-    { name: "description", content: "A state machine powered couter" },
+    { title: "Counter App (Jotai)" },
+    { name: "description", content: "A simple counter app powered by Jotai" },
   ];
 }
 

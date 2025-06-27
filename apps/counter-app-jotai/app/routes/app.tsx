@@ -4,8 +4,8 @@ import {
   MinusIcon,
 } from "@heroicons/react/24/outline";
 
-import type { Route } from "./+types/jodi";
-import Button from "~/components/Button";
+import type { Route } from "./+types/app";
+import { Button } from "package-ui";
 import { padWithZeros } from "~/lib/utils";
 import Config from "~/components/Config";
 

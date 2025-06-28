@@ -16,7 +16,8 @@
     "react-dom": "^19.1.0",
     "react-router": "^7.5.3",
     "package-ui": "*",
-    "package-utils": "*"
+    "package-utils": "*",
+    "package-types": "*"
   },
   "devDependencies": {
     "@react-router/dev": "^7.5.3",

@@ -4,9 +4,10 @@ import {
   MinusIcon,
 } from "@heroicons/react/24/outline";
 
-import type { Route } from "./+types/jodi";
-import Button from "~/components/Button";
-import { padWithZeros } from "~/lib/utils";
+import { Button } from "package-ui";
+import { cn, padWithZeros } from "package-utils";
+
+import type { Route } from "./+types/app";
 import Config from "~/components/Config";
 
 export default function Jodi({}: Route.ComponentProps) {

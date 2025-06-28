@@ -48,3 +48,5 @@
     @apply underline;
   }
 }
+
+@config "../tailwind.config.js";

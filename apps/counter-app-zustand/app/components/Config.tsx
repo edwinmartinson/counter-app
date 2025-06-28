@@ -6,10 +6,8 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { useState } from "react";
-import Button from "./Button";
 import { Form } from "react-router";
-import Input from "./Input";
-import Switch from "./Switch";
+import { Button, Input, Switch } from "package-ui";
 
 export default function Config() {
   let [isOpen, setIsOpen] = useState(false);

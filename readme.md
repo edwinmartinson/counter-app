@@ -9,7 +9,7 @@ A simple counter app built with react to test various state management solutions
 - 🙂 Reset counter to initial state.
 - 🔒 Set max count and delay for operations
 - 🧩 **Compare State Management:**
-  - The app demonstrates different state management solutions on different routes:
+  - The app demonstrates different state management solutions:
     - **Jotai**
     - **Zustand**
     - **Redux**

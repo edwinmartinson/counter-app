@@ -18,7 +18,7 @@ import { cn, padWithZeros } from "package-utils";
 import type { Route } from "./+types/app";
 import Config from "~/components/Config";
 
-export default function Jodi({}: Route.ComponentProps) {
+export default function App({}: Route.ComponentProps) {
   const context = useAtom(counterAtom)[0];
   const resetContext = useAtom(resetContextAtom)[1];
   const updateStep = useAtom(updateStepAtom)[1];

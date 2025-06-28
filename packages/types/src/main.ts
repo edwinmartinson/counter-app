@@ -6,3 +6,9 @@ export type Context = {
   isDelayed: boolean;
   isLoading: boolean;
 };
+
+export type ConfigParam = {
+  max: number;
+  delay: number;
+  isDelayed: boolean;
+};

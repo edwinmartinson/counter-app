@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import type { Context } from "package-types";
+import type { Context, ConfigParam } from "package-types";
 
 export const counterAtom = atom<Context>({
   step: 1,
@@ -25,8 +25,6 @@ export const resetContextAtom = atom(null, (get, set) => {
     isLoading: false,
   });
 });
-
-type ConfigParam = { max: number; delay: number; isDelayed: boolean };
 
 export const updateConfigAtom = atom(null, (get, set, param: ConfigParam) => {
   const context = get(counterAtom);

@@ -12,3 +12,5 @@ export type ConfigParam = {
   delay: number;
   isDelayed: boolean;
 };
+
+export type Operation = "INC" | "DEC";

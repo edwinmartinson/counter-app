@@ -8,14 +8,16 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { Button, Input, Switch } from "package-ui";
-import { useCounter, useCounterActions } from "~/store/zustand";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "~/store/store";
+import { config } from "~/store/counterSlice";
 
 export default function Config() {
   let [isOpen, setIsOpen] = useState(false);
   let [isDelayed, setIsDelayed] = useState(false);
 
-  const context = useCounter();
-  const { config } = useCounterActions();
+  const context = useSelector((state: RootState) => state.counter);
+  const dispatch = useDispatch();
 
   const handle = {
     open: () => {
@@ -34,11 +36,13 @@ export default function Config() {
       const max = formData.get("max") as string;
       const delay = formData.get("delay") as string;
 
-      config({
-        isDelayed,
-        max: Number.parseInt(max),
-        delay: Number.parseInt(delay),
-      });
+      dispatch(
+        config({
+          isDelayed,
+          max: Number.parseInt(max),
+          delay: Number.parseInt(delay),
+        }),
+      );
 
       handle.close();
     },

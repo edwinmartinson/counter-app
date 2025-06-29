@@ -9,25 +9,31 @@ import { cn, padWithZeros } from "package-utils";
 
 import type { Route } from "./+types/app";
 import Config from "~/components/Config";
-import { useCounter, useCounterActions } from "~/store/zustand";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "~/store/store";
+import { reset, step, count, delayedCount } from "~/store/counterSlice";
 
 export default function App({}: Route.ComponentProps) {
-  const context = useCounter();
-  const { reset, step, count, delayedCount } = useCounterActions();
+  const context = useSelector((state: RootState) => state.counter);
+  const dispatch = useDispatch<AppDispatch>();
 
   const handle = {
-    reset: () => reset(),
-    incrementStep: () => step("INC"),
-    decrementStep: () => step("DEC"),
+    reset: () => dispatch(reset()),
+    incrementStep: () => dispatch(step("INC")),
+    decrementStep: () => dispatch(step("DEC")),
     incrementCount: () => {
       if (context.isDelayed) {
-        delayedCount("INC");
-      } else count("INC");
+        if (!context.isLoading && context.count + context.step <= context.max) {
+          dispatch(delayedCount("INC"));
+        }
+      } else dispatch(count("INC"));
     },
     decrementCount: () => {
       if (context.isDelayed) {
-        delayedCount("DEC");
-      } else count("DEC");
+        if (!context.isLoading && context.count - context.step >= 0) {
+          dispatch(delayedCount("DEC"));
+        }
+      } else dispatch(count("DEC"));
     },
   };
 

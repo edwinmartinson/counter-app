@@ -1,5 +1,5 @@
 {
-  "name": "app-redux",
+  "name": "app-effector",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,15 +11,16 @@
   "dependencies": {
     "@react-router/node": "^7.5.3",
     "@react-router/serve": "^7.5.3",
-    "@reduxjs/toolkit": "^2.8.2",
+    "effector": "^23.3.0",
+    "effector-react": "^23.3.0",
     "isbot": "^5.1.27",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-redux": "^9.2.0",
-    "react-router": "^7.5.3",
     "package-types": "*",
     "package-ui": "*",
-    "package-utils": "*"
+    "package-utils": "*",
+    "patronum": "^2.3.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router": "^7.5.3"
   },
   "devDependencies": {
     "@react-router/dev": "^7.5.3",

@@ -52,7 +52,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Counter App (Effector)" },
+    { title: "Counter App (XState/store)" },
     { name: "description", content: "A simple counter app powered by Jotai" },
   ];
 }

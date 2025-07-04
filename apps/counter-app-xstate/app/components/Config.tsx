@@ -8,21 +8,21 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { Button, Input, Switch } from "package-ui";
-import { useUnit } from "effector-react";
-import { $counter, counterConfig } from "~/store/effector";
+import { useSelector } from "@xstate/store/react";
+import { counter } from "~/store/xstate";
 
 export default function Config() {
   let [isOpen, setIsOpen] = useState(false);
   let [isDelayed, setIsDelayed] = useState(false);
 
-  const [counter, config] = useUnit([$counter, counterConfig]);
+  const context = useSelector(counter, (state) => state.context);
 
   const handle = {
     open: () => {
-      if (counter.isLoading) return;
+      if (context.isLoading) return;
 
       setIsOpen(true);
-      setIsDelayed(counter.isDelayed);
+      setIsDelayed(context.isDelayed);
     },
     close: () => {
       setIsOpen(false);
@@ -34,10 +34,12 @@ export default function Config() {
       const max = formData.get("max") as string;
       const delay = formData.get("delay") as string;
 
-      config({
-        isDelayed,
-        max: Number.parseInt(max),
-        delay: Number.parseInt(delay),
+      counter.trigger.config({
+        value: {
+          isDelayed,
+          max: Number.parseInt(max),
+          delay: Number.parseInt(delay),
+        },
       });
 
       handle.close();
@@ -77,13 +79,13 @@ export default function Config() {
                   name="max"
                   type="number"
                   label="Max count"
-                  defaultValue={counter.max}
+                  defaultValue={context.max}
                 />
                 <Input
                   name="delay"
                   type="number"
                   label="Delay (sec)"
-                  defaultValue={counter.delay}
+                  defaultValue={context.delay}
                 />
                 <Switch
                   name="delayActive"

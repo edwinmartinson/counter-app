@@ -8,21 +8,21 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { Button, Input, Switch } from "package-ui";
-import { useCounter, useCounterActions } from "~/store/zustand";
+import { useUnit } from "effector-react";
+import { $counter, counterConfig } from "~/store/effector";
 
 export default function Config() {
   let [isOpen, setIsOpen] = useState(false);
   let [isDelayed, setIsDelayed] = useState(false);
 
-  const context = useCounter();
-  const { config } = useCounterActions();
+  const [counter, config] = useUnit([$counter, counterConfig]);
 
   const handle = {
     open: () => {
-      if (context.isLoading) return;
+      if (counter.isLoading) return;
 
       setIsOpen(true);
-      setIsDelayed(context.isDelayed);
+      setIsDelayed(counter.isDelayed);
     },
     close: () => {
       setIsOpen(false);
@@ -77,13 +77,13 @@ export default function Config() {
                   name="max"
                   type="number"
                   label="Max count"
-                  defaultValue={context.max}
+                  defaultValue={counter.max}
                 />
                 <Input
                   name="delay"
                   type="number"
                   label="Delay (sec)"
-                  defaultValue={context.delay}
+                  defaultValue={counter.delay}
                 />
                 <Switch
                   name="delayActive"

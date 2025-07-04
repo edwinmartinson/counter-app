@@ -3,29 +3,41 @@ import {
   PlusIcon,
   MinusIcon,
 } from "@heroicons/react/24/outline";
+import { useUnit } from "effector-react";
 
 import { Button } from "package-ui";
 import { cn, padWithZeros } from "package-utils";
 
 import type { Route } from "./+types/app";
 import Config from "~/components/Config";
-import { useCounter, useCounterActions } from "~/store/zustand";
+import {
+  $counter,
+  counterReset,
+  counterStep,
+  counterCount,
+  counterCountDelay,
+} from "~/store/effector";
 
 export default function App({}: Route.ComponentProps) {
-  const context = useCounter();
-  const { reset, step, count, delayedCount } = useCounterActions();
+  const [state, reset, count, step, delayedCount] = useUnit([
+    $counter,
+    counterReset,
+    counterCount,
+    counterStep,
+    counterCountDelay,
+  ]);
 
   const handle = {
     reset: () => reset(),
     incrementStep: () => step("INC"),
     decrementStep: () => step("DEC"),
     incrementCount: () => {
-      if (context.isDelayed) {
+      if (state.isDelayed) {
         delayedCount("INC");
       } else count("INC");
     },
     decrementCount: () => {
-      if (context.isDelayed) {
+      if (state.isDelayed) {
         delayedCount("DEC");
       } else count("DEC");
     },
@@ -45,7 +57,7 @@ export default function App({}: Route.ComponentProps) {
                 <PlusIcon className="size-4.5 stroke-2" />
               </Button>
 
-              <p className="text-lg">{padWithZeros(context.step, 2)}</p>
+              <p className="text-lg">{padWithZeros(state.step, 2)}</p>
 
               <Button
                 variant="rounded"
@@ -69,10 +81,8 @@ export default function App({}: Route.ComponentProps) {
                 <PlusIcon className="size-6 stroke-3" />
               </Button>
 
-              <p
-                className={cn("text-5xl", context.isLoading && "animate-pulse")}
-              >
-                {padWithZeros(context.count, 2)}
+              <p className={cn("text-5xl", state.isLoading && "animate-pulse")}>
+                {padWithZeros(state.count, 2)}
               </p>
 
               <Button
@@ -85,7 +95,7 @@ export default function App({}: Route.ComponentProps) {
             </div>
 
             <p className="text-content-tertiary text-center">
-              Max count: {context.max}
+              Max count: {state.max}
             </p>
           </div>
 
